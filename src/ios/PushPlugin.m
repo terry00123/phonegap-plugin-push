@@ -44,6 +44,8 @@
 @synthesize clearBadge;
 @synthesize handlerObj;
 
+@synthesize notificationPresentationOptions;
+
 @synthesize usesFCM;
 @synthesize fcmSandbox;
 @synthesize fcmSenderId;
@@ -198,6 +200,7 @@
             [self setFcmTopics:topics];
 
             UNAuthorizationOptions authorizationOptions = UNAuthorizationOptionNone;
+            notificationPresentationOptions = UNNotificationPresentationOptionNone;
 
             id badgeArg = [iosOptions objectForKey:@"badge"];
             id soundArg = [iosOptions objectForKey:@"sound"];
@@ -207,16 +210,19 @@
             if (([badgeArg isKindOfClass:[NSString class]] && [badgeArg isEqualToString:@"true"]) || [badgeArg boolValue])
             {
                 authorizationOptions |= UNAuthorizationOptionBadge;
+                presentationOptions |= UNNotificationPresentationOptionBadge;
             }
 
             if (([soundArg isKindOfClass:[NSString class]] && [soundArg isEqualToString:@"true"]) || [soundArg boolValue])
             {
                 authorizationOptions |= UNAuthorizationOptionSound;
+                presentationOptions |= UNNotificationPresentationOptionSound;
             }
 
             if (([alertArg isKindOfClass:[NSString class]] && [alertArg isEqualToString:@"true"]) || [alertArg boolValue])
             {
                 authorizationOptions |= UNAuthorizationOptionAlert;
+                presentationOptions |= UNNotificationPresentationOptionAlert;
             }
 
             if (clearBadgeArg == nil || ([clearBadgeArg isKindOfClass:[NSString class]] && [clearBadgeArg isEqualToString:@"false"]) || ![clearBadgeArg boolValue]) {

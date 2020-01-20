@@ -55,6 +55,8 @@
 @property BOOL clearBadge;
 @property (nonatomic, strong) NSMutableDictionary *handlerObj;
 
+@property UNNotificationPresentationOptions notificationPresentationOptions;
+
 - (void)init:(CDVInvokedUrlCommand*)command;
 - (void)unregister:(CDVInvokedUrlCommand*)command;
 - (void)subscribe:(CDVInvokedUrlCommand*)command;
